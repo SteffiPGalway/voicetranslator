@@ -1,4 +1,5 @@
 #import packages
+from streamlit_webrtc import webrtc_streamer
 from gpytranslate import Translator
 import speech_recognition as sr
 import streamlit as st
@@ -37,6 +38,8 @@ import asyncio
 #     except sr.RequestError as e:
 #         print("Could not request results from Google Speech Recognition service; {0}".format(e))
 #     return text
+
+webrtc_streamer(key="sample")
 
 #import audio file
 audio_file = "results.wav"
