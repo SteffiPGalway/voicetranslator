@@ -8,9 +8,25 @@ import os
 
 # api_key = os.getenv('OPENAI_API_KEY')
 
-os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+# Ask the user's api key
+with st.form('form'):
+    user_api_key = st.text_input('Enter OpenAI API token:', type='password')
+    submit = st.form_submit_button('Submit')
 
-client = OpenAI()
+if submit:
+    if len(user_api_key) == 51 and user_api_key.startswith('sk-'):
+        client = OpenAI(api_key=user_api_key)
+        st.success('api key is successfully entered')
+    else:
+        st.error('Your api key is invalid.')
+        st.stop()
+
+# Make the client visible to other codes below it. 
+client = OpenAI(api_key=user_api_key)
+
+# os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+
+# client = OpenAI()
 
 st.title("Voice Translation App")
 
